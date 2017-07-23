@@ -56,8 +56,29 @@ def create_product():
     print("NEW PRODUCT IS: ", new_product)
     products.append(new_product)
 
-def product_operation():
-    print("UPDATING A PRODUCT:")
+def update_product():
+    print("Update a product ")
+    product_id = input("OK. Please specify the product's identifier: ")
+    if int(product_id) <= len(products):
+        for product in products:
+            product_show = lookup_product_by_id(product_id)
+        print("SHOWING A PRODUCT HERE: ", dict(product_show))
+
+        product_name = input("name is: ")
+        product_aisle = input("aisle is: ")
+        product_department = input("department is: ")
+        product_price = input("price is: ")
+        updated_product = {
+            "id": int(product_id),
+            "name": product_name,
+            "aisle": product_aisle,
+            "department": product_department,
+            "price": product_price,
+        }
+        print("NEW PRODUCT IS: ", updated_product)
+    else:
+        print("ERROR, Invalid product ID!")
+
 
 def destroy_operation():
     print("REMOVING A PRODUCT:")
@@ -70,7 +91,7 @@ print("This is your desired operation: " + product_operation)
 if product_operation == "List": list_products()
 elif product_operation == "Show": show_products()
 elif product_operation == "Create": create_product()
-elif product_operation == "Update": product_operation()
+elif product_operation == "Update": update_product()
 elif product_operation == "Destroy": destroy_operation()
 else:
     print("PLEASE CHOOSE ONE OF THE AVAILABLE OPERATIONS!")
