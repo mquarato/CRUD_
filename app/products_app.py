@@ -12,7 +12,7 @@ with open(csv_file_path, "r") as csv_file:
 
 def lookup_product_by_id(product_id):
     matching_products = [product for product in products if product["id"] == product_id]
-    return matching_products
+    return matching_products[0]
 
 print("-----------------------------------")
 print("PRODUCTS APPLICATION")
@@ -36,8 +36,7 @@ def list_products():
 
 def show_products():
     product_id = input("OK. Please specify the product's identifier: ")
-    product_id = int(product_id)
-    for product_id in products:
+    for product in products:
         product_show = lookup_product_by_id(product_id)
     print("SHOWING A PRODUCT HERE: ", dict(product_show))
 
@@ -68,16 +67,11 @@ product_operation = input("\nInput your operation: ")
 
 print("This is your desired operation: " + product_operation)
 
-if product_operation == "List":
-    list_products()
-elif product_operation == "Show":
-    show_products()
-elif product_operation == "Create":
-    create_product()
-elif product_operation == "Update":
-    product_operation()
-elif product_operation == "Destroy":
-    destroy_operation()
+if product_operation == "List": list_products()
+elif product_operation == "Show": show_products()
+elif product_operation == "Create": create_product()
+elif product_operation == "Update": product_operation()
+elif product_operation == "Destroy": destroy_operation()
 else:
     print("PLEASE CHOOSE ONE OF THE AVAILABLE OPERATIONS!")
 
