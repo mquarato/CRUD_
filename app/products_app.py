@@ -5,7 +5,7 @@ other_path = "data/other_products.csv"
 
 products = []
 
-with open(other_path, "r") as csv_file:
+with open(csv_file_path, "r") as csv_file:
     reader = csv.DictReader(csv_file)
     for row in reader:
         products.append(row)
@@ -19,13 +19,14 @@ def valid_id(id):
     for product in products:
         ids.append(product["id"])
     while(id not in ids):
-        id = input("Wrong identifier! Please try again: ")
+        id = input("Wrong identifier! Please insert a correct id: ")
     return id
 
+username = input("Please insert your username: ")
 print("-----------------------------------")
 print("PRODUCTS APPLICATION")
 print("-----------------------------------")
-print("Welcome @mquarato!")
+print("Welcome @" + username + "!")
 print("\n")
 print("There are " + str(len(products)) + " products in the database. Please select an operation:")
 print("\n")
@@ -37,6 +38,10 @@ print("   'Create'  | Add a new product.")
 print("   'Update'  | Edit an existing product")
 print("   'Destroy' | Delete an existing product.")
 print("\n")
+
+product_operation = input("\nInput your operation: ")
+product_operation = product_operation.title()
+print("This is your desired operation: " + product_operation)
 
 def list_products():
     for product in products:
@@ -108,10 +113,6 @@ def destroy_operation():
     else:
         print("ERROR, Invalid product ID!")
 
-product_operation = input("\nInput your operation: ")
-
-print("This is your desired operation: " + product_operation)
-
 if product_operation == "List": list_products()
 elif product_operation == "Show": show_products()
 elif product_operation == "Create": create_product()
@@ -122,7 +123,7 @@ else:
 
 
 other_path = "data/other_products.csv"
-with open(other_path, "w") as csv_file:
+with open(csv_file_path, "w") as csv_file:
     writer = csv.DictWriter(csv_file, fieldnames=["id", "name", "aisle", "department", "price"])
     writer.writeheader() # uses fieldnames set above
     for product in products:
