@@ -1,4 +1,5 @@
 import csv
+import operator
 
 csv_file_path = "data/products.csv"
 other_path = "data/other_products.csv"
@@ -14,13 +15,7 @@ def lookup_product_by_id(product_id):
     matching_products = [product for product in products if product["id"] == product_id]
     return matching_products[0]
 
-def valid_id(id):
-    ids = []
-    for product in products:
-        ids.append(product["id"])
-    while(id not in ids):
-        id = input("Wrong identifier! Please try again: ")
-    return id
+#products = sorted(products, key=operator.itemgetter("id"))
 
 print("-----------------------------------")
 print("PRODUCTS APPLICATION")
@@ -44,7 +39,6 @@ def list_products():
 
 def show_products():
     product_id = input("OK. Please specify the product's identifier: ")
-    product_id = valid_id(product_id)
     for product in products:
         product_show = lookup_product_by_id(product_id)
     print("SHOWING A PRODUCT HERE: ", dict(product_show))
@@ -67,33 +61,26 @@ def create_product():
 
 def update_product():
     print("Update a product ")
-    update_product_id = input("OK. Please specify the product's identifier: ")
-    product = [product for product in products if product["id"] == update_product_id]
-    if product:
-        product = product[0]
-        print("SHOWING A PRODUCT HERE: ", dict(product))
-        update_product_name = input("name is: ")
-        update_product_aisle = input("aisle is: ")
-        update_product_department = input("department is: ")
-        update_product_price = input("price is: ")
+    product_id = input("OK. Please specify the product's identifier: ")
+    if int(product_id) <= len(products):
+        for product in products:
+            product_show = lookup_product_by_id(product_id)
+        print("SHOWING A PRODUCT HERE: ", dict(product_show))
+        row = int(product_id)
+        product_name = input("name is: ")
+        product_aisle = input("aisle is: ")
+        product_department = input("department is: ")
+        product_price = input("price is: ")
         updated_product = {
-            "id": update_product_id,
-            "name": update_product_name,
-            "aisle": update_product_aisle,
-            "department": update_product_department,
-            "price": update_product_price,
+            "id": product_id,
+            "name": product_name,
+            "aisle": product_aisle,
+            "department": product_department,
+            "price": product_price,
         }
+        del products[row-1]
+        products.append(updated_product)
         print("UPDATED PRODUCT IS: ", updated_product)
-        confirmation = input("Please type Y to confirm update: ")
-        confirmation = confirmation.capitalize()
-        if confirmation == "Y":
-            product["name"] = update_product_name
-            product["aisle"] = update_product_aisle
-            product["department"] = update_product_department
-            product["price"] = update_product_price
-            print("Product has been updated!")
-        else:
-            print("OK. We won't update")
     else:
         print("ERROR, Invalid product ID!")
 
