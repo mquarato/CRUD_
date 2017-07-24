@@ -13,8 +13,8 @@ This application allows you to use a database of products to do the following fu
 Download the source code:
 
 ```shell
-git clone remote_clone_address_of_your_repo_here
-cd some/path/to/repo/
+git clone https://github.com/mquarato/CRUD_
+cd ~Desktop/CRUD/app
 ```
 
 Finally, download the [example `products.csv` file]
