@@ -1,4 +1,4 @@
-# Production Application Database
+# Mike's CRUD Application
 
 This application allows you to use a database of products to do the following functions:
 
