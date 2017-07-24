@@ -13,7 +13,7 @@ This application allows you to use a database of products to do the following fu
 Download the source code:
 
 ```shell
-git clone https://github.com/mquarato/CRUD_
+git clone https://github.com/mquarato/CRUD_.git
 cd ~Desktop/CRUD/app
 ```
 
